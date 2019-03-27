@@ -11,11 +11,13 @@ public class Hotel {
     }
 
     public void checkInGuestBedroom(Bedroom bedroom, Guest guest) {
-        bedroom.addGuest(guest);
+        if (this.bedrooms.contains(bedroom)) {
+        bedroom.addGuest(guest); }
     }
 
     public void checkInGuestConferenceRoom(ConferenceRoom conferenceRoom, Guest guest) {
-        conferenceRoom.addGuest(guest);
+        if (this.conferenceRooms.contains(conferenceRoom)) {
+        conferenceRoom.addGuest(guest); }
     }
 
     public void checkOutGuestBedroom(Bedroom bedroom, Guest guest) {
@@ -24,5 +26,9 @@ public class Hotel {
 
     public void checkOutGuestConferenceRoom(ConferenceRoom conferenceRoom, Guest guest) {
         conferenceRoom.removeGuest(guest);
+    }
+
+    public Booking bookRoom(Bedroom bedroom, int numberOfNights) {
+        return new Booking(bedroom, numberOfNights);
     }
 }
