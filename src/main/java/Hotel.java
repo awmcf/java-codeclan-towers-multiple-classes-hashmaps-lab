@@ -31,4 +31,14 @@ public class Hotel {
     public Booking bookRoom(Bedroom bedroom, int numberOfNights) {
         return new Booking(bedroom, numberOfNights);
     }
+
+    public Bedroom[] vacantRooms() {
+        Bedroom[] vacantBedrooms = new Bedroom[]{};
+        for (Bedroom bedroom : this.bedrooms) {
+            if (bedroom.countGuests() == 0) {
+                vacantBedrooms[0] = bedroom;
+            }
+        }
+        return vacantBedrooms;
+    }
 }

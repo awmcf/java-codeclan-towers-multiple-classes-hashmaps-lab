@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class HotelTest {
@@ -18,6 +19,7 @@ public class HotelTest {
     Guest guest2;
     Bedroom bedroom3;
     ConferenceRoom conferenceRoom3;
+    Bedroom bedroom4;
 
     @Before
     public void before() {
@@ -28,6 +30,7 @@ public class HotelTest {
         bedrooms = new ArrayList<>();
         bedrooms.add(bedroom1);
         bedrooms.add(bedroom2);
+        bedrooms.add(bedroom4);
         conferenceRooms = new ArrayList<>();
         conferenceRooms.add(conferenceRoom1);
         conferenceRooms.add(conferenceRoom2);
@@ -36,6 +39,7 @@ public class HotelTest {
         guest2 = new Guest("Mark Zuckerberg");
         bedroom3 = new Bedroom(69, 2, "double", 12.99);
         conferenceRoom3 = new ConferenceRoom("The Craig King's Banquet Room", 50);
+        bedroom4 = new Bedroom(54, 1, "single" , 15.99);
     }
 
     @Test
@@ -81,6 +85,13 @@ public class HotelTest {
         Booking booking = hotel.bookRoom(bedroom1, 3);
         assertEquals(bedroom1, booking.getBedroom());
         assertEquals(3, booking.getNumberOfNights());
+    }
+
+    @Test
+    public void canReturnVacantRooms() {
+        hotel.checkInGuestBedroom(bedroom1, guest1);
+        hotel.checkInGuestBedroom(bedroom2, guest2);
+        assertEquals(bedroom4, hotel.vacantRooms()[0]);
     }
 
 }
